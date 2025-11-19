@@ -1,0 +1,16 @@
+
+:root{
+--bg: #0B0F14;
+--surface: #0F1720;
+--primary: #2A6FFF;
+--accent: #8A4CFF;
+--glow: #49E6FF;
+--text: #E6EEF6;
+--muted: #9AA7B2;
+--border: rgba(255,255,255,0.04);
+--radius: 12px;
+--card-padding: 16px;
+--transition: 220ms cubic-bezier(.2,.9,.2,1);
+--hero-grad: linear-gradient(135deg, #0B0F14 0%, #0F1720 30%, #24123A 60%, #0B1220 100%);
+--accent-grad: linear-gradient(90deg, var(--primary), var(--accent));
+}

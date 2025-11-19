@@ -1,0 +1,13 @@
+.header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:44px;height:44px;border-radius:8px;background:var(--accent-grad);display:grid;place-items:center;font-weight:700;color:white;font-family:Orbitron, sans-serif}
+.search{flex:1;margin:0 20px}
+.search input{width:100%;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:10px;outline:none}
+.header-actions{display:flex;gap:8px;align-items:center}
+.layout{display:grid;grid-template-columns:260px 1fr;gap:24px}
+.sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid var(--border);padding:16px;border-radius:12px;height:fit-content}
+.main{display:flex;flex-direction:column;gap:18px}
+.hero{padding:20px;border-radius:12px;background:var(--hero-grad);color:var(--text);border:1px solid var(--border);box-shadow:0 8px 28px rgba(6,8,15,0.6)}
+
+
+@media (max-width:1024px){.layout{grid-template-columns:220px 1fr}}@media (max-width:720px){.layout{grid-template-columns:1fr}.search{order:3;width:100%;margin:12px 0 0 0}}
