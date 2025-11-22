@@ -40,7 +40,11 @@ export default function Filters({ initial = {}, onApply = () => {}, onClear = ()
       {/* Género */}
       <label className="field">
         <span className="field-label">Género</span>
-        <select value={genre} onChange={(e) => setGenre(e.target.value)}>
+        <select
+          className="select-filter"
+          value={genre}
+          onChange={(e) => setGenre(e.target.value)}
+        >
           <option value="">Todos</option>
           <option value="RPG">RPG</option>
           <option value="Acción">Acción</option>
@@ -54,7 +58,11 @@ export default function Filters({ initial = {}, onApply = () => {}, onClear = ()
       {/* Plataforma */}
       <label className="field">
         <span className="field-label">Plataforma</span>
-        <select value={platform} onChange={(e) => setPlatform(e.target.value)}>
+        <select
+          className="select-filter"
+          value={platform}
+          onChange={(e) => setPlatform(e.target.value)}
+        >
           <option value="">Todas</option>
           <option value="PC">PC</option>
           <option value="PS5">PlayStation 5</option>
@@ -68,7 +76,11 @@ export default function Filters({ initial = {}, onApply = () => {}, onClear = ()
       {/* Estado */}
       <label className="field">
         <span className="field-label">Estado</span>
-        <select value={completed} onChange={(e) => setCompleted(e.target.value)}>
+        <select
+          className="select-filter"
+          value={completed}
+          onChange={(e) => setCompleted(e.target.value)}
+        >
           <option value="any">Todos</option>
           <option value="completed">Completado</option>
           <option value="incomplete">Pendiente</option>
@@ -78,7 +90,11 @@ export default function Filters({ initial = {}, onApply = () => {}, onClear = ()
       {/* Ordenar */}
       <label className="field">
         <span className="field-label">Ordenar por</span>
-        <select value={sort} onChange={(e) => setSort(e.target.value)}>
+        <select
+          className="select-filter"
+          value={sort}
+          onChange={(e) => setSort(e.target.value)}
+        >
           <option value="none">Sin ordenar</option>
           <option value="date-desc">Nuevos primero</option>
           <option value="date-asc">Antiguos primero</option>
