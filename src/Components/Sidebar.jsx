@@ -8,7 +8,7 @@ export default function Sidebar({
   onClear = () => {},
 }) {
   return (
-    <aside className="sidebar-full">
+    <aside className="sidebar">
       <Filters initial={filters} onApply={onApply} onClear={onClear} />
     </aside>
   );

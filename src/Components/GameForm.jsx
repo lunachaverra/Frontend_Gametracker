@@ -1,3 +1,4 @@
+// src/Components/GameForm.jsx
 import React, { useEffect, useState } from "react";
 
 export default function GameForm({
@@ -15,6 +16,11 @@ export default function GameForm({
   const [rating, setRating] = useState(0);
   const [saving, setSaving] = useState(false);
 
+  // preview / validación
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [previewValid, setPreviewValid] = useState(null); // null = no probado, true/false = resultado
+  const [previewLoading, setPreviewLoading] = useState(false);
+
   useEffect(() => {
     if (initial) {
       setTitle(initial.title || "");
@@ -24,6 +30,8 @@ export default function GameForm({
       setCover(initial.cover || "");
       setDescription(initial.description || "");
       setRating(initial.rating ?? 0);
+      setPreviewUrl(initial.cover || "");
+      setPreviewValid(initial.cover ? true : null);
     } else {
       setTitle("");
       setPlatform("");
@@ -32,14 +40,47 @@ export default function GameForm({
       setCover("");
       setDescription("");
       setRating(0);
+      setPreviewUrl("");
+      setPreviewValid(null);
     }
   }, [initial]);
+
+  // Valida si la URL apunta a una imagen cargable
+  const validateImageUrl = (url) => {
+    if (!url) {
+      setPreviewUrl("");
+      setPreviewValid(null);
+      return;
+    }
+
+    setPreviewLoading(true);
+    const img = new Image();
+    img.onload = () => {
+      setPreviewUrl(url);
+      setPreviewValid(true);
+      setPreviewLoading(false);
+    };
+    img.onerror = () => {
+      setPreviewUrl("");
+      setPreviewValid(false);
+      setPreviewLoading(false);
+    };
+
+    // Forzar el intento de carga
+    img.src = url;
+  };
+
+  // handler cuando cambia el input cover
+  const handleCoverChange = (value) => {
+    setCover(value);
+    validateImageUrl(value.trim());
+  };
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
     if (!title.trim()) return alert("El título es obligatorio");
-    if (progress < 0 || progress > 100) return alert("Progress debe estar entre 0 y 100");
-    if (rating < 0 || rating > 5) return alert("Rating debe estar entre 0 y 5");
+    if (progress < 0 || progress > 100) return alert("Progreso debe estar entre 0 y 100");
+    if (rating < 0 || rating > 5) return alert("Calificación debe estar entre 0 y 5");
 
     const payload = {
       ...(initial?.id ? { id: initial.id } : {}),
@@ -47,14 +88,17 @@ export default function GameForm({
       platform: platform.trim() || "PC",
       status: status.trim() || "Pendiente",
       progress: Number(progress),
-      cover:
-        cover ||
-        `https://picsum.photos/200/300?random=${Math.floor(Math.random() * 1000)}`,
+      cover: cover || (previewValid ? previewUrl : ""),
       description: description || "",
       rating: Number(rating),
     };
 
-    console.log("GameForm submit payload:", payload);
+    if (cover && previewValid === false) {
+      const ok = confirm(
+        "La URL de la imagen parece no cargar correctamente. ¿Deseas guardar de todos modos?"
+      );
+      if (!ok) return;
+    }
 
     try {
       setSaving(true);
@@ -70,17 +114,57 @@ export default function GameForm({
 
   const isSaving = saving || parentSaving;
 
+  // cerrar al presionar Esc
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  // bloquear scroll del body mientras el modal esté abierto
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev || "";
+    };
+  }, []);
+
+  // cerrar si el usuario hace click fuera del modal
+  const handleOverlayMouseDown = (e) => {
+    // detecta clicks en el overlay por su data-attribute
+    if (e.target && e.target.dataset && e.target.dataset.modalOverlay) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="modal-backdrop" role="dialog" aria-modal="true">
-      <div className="modal">
-        <header className="modal-header">
-          <h3>{initial ? "Editar juego" : "Agregar juego"}</h3>
+    <div
+      // añadimos data-modal-overlay para una detección robusta de clicks
+      data-modal-overlay="true"
+      className="modal-backdrop"
+      role="dialog"
+      aria-modal="true"
+      onMouseDown={handleOverlayMouseDown}
+    >
+      <div
+        className="modal"
+        role="document"
+        onMouseDown={(e) => e.stopPropagation()}
+      >
+        <header
+          className="modal-header"
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+        >
+          <h3 style={{ margin: 0 }}>{initial ? "Editar juego" : "Agregar juego"}</h3>
           <button className="btn" onClick={onClose} aria-label="Cerrar">
             Cerrar
           </button>
         </header>
 
-        <form onSubmit={handleSubmit} className="modal-body">
+        <form onSubmit={handleSubmit} className="modal-body" style={{ marginTop: 12 }}>
           <label className="field">
             <div className="field-label">Título</div>
             <input
@@ -125,7 +209,28 @@ export default function GameForm({
             />
           </label>
 
-          {/* Campo rating */}
+          <label className="field">
+            <div className="field-label">Cover (URL)</div>
+            <input
+              value={cover}
+              onChange={(e) => handleCoverChange(e.target.value)}
+              placeholder="https://... (usa 'abrir imagen en nueva pestaña' para obtener URL directa)"
+              disabled={isSaving}
+            />
+            {/* Previsualización */}
+            <div style={{ marginTop: 8 }}>
+              {previewLoading && <div style={{ color: "var(--muted)" }}>Comprobando imagen...</div>}
+              {previewValid === true && (
+                <img src={previewUrl} alt="Preview cover" style={{ width: 120, borderRadius: 8 }} />
+              )}
+              {previewValid === false && (
+                <div style={{ color: "#ff6b6b", fontSize: 13 }}>
+                  No se pudo cargar la imagen desde esa URL. Asegúrate de usar la URL directa.
+                </div>
+              )}
+            </div>
+          </label>
+
           <label className="field">
             <div className="field-label">Calificación (0-5)</div>
             <input
@@ -134,16 +239,6 @@ export default function GameForm({
               max="5"
               value={rating}
               onChange={(e) => setRating(e.target.value)}
-              disabled={isSaving}
-            />
-          </label>
-
-          <label className="field">
-            <div className="field-label">Cover (URL)</div>
-            <input
-              value={cover}
-              onChange={(e) => setCover(e.target.value)}
-              placeholder="https://..."
               disabled={isSaving}
             />
           </label>
@@ -158,7 +253,7 @@ export default function GameForm({
             />
           </label>
 
-          <footer style={{ display: "flex", justifyContent: "flex-end", gap: 8 }}>
+          <footer style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 8 }}>
             <button type="button" className="btn" onClick={onClose} disabled={isSaving}>
               Cancelar
             </button>

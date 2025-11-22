@@ -5,8 +5,6 @@ const STAR_PATH =
   "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z";
 
 function starFillPercent(index, rating) {
-  // index: 1..5, rating: number (0..5, puede ser decimal)
-  // devuelve 0..100 porcentaje de llenado para la estrella `index`.
   const starValue = Math.max(0, Math.min(1, rating - (index - 1)));
   return Math.round(starValue * 100);
 }
@@ -37,7 +35,7 @@ export default function GameCard({ game, onEdit, onDelete, onRate }) {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            gap: 12,
+            gap: 0,
             alignItems: "flex-start",
           }}
         >
@@ -48,7 +46,6 @@ export default function GameCard({ game, onEdit, onDelete, onRate }) {
             </div>
           </div>
 
-          {/* Rating stars (SVGs with gradient fill percentage) */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
             <div className="stars" aria-label={`Calificación ${rating} de 5`}>
               {[1, 2, 3, 4, 5].map((i) => {

@@ -1,5 +1,3 @@
-// src/services/api.js
-// Usar import.meta.env para Vite; si no existe, usar localhost por defecto.
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
 async function handleRes(res) {
@@ -10,7 +8,6 @@ async function handleRes(res) {
     err.body = text;
     throw err;
   }
-  // intentar json, si falla devolver null
   try { return await res.json(); } catch { return null; }
 }
 
@@ -41,7 +38,7 @@ export async function addGame(game) {
 export async function deleteGame(id) {
   try {
     const res = await fetch(`${API_BASE}/api/games/${id}`, { method: 'DELETE' });
-    return await handleRes(res); // puede devolver {} o info del servidor
+    return await handleRes(res);
   } catch (e) {
     console.error('deleteGame error', e);
     return null;

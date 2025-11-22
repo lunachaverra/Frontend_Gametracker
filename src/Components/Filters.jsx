@@ -1,13 +1,8 @@
 // src/Components/Filters.jsx
 import React, { useState, useEffect } from "react";
 
-/**
- * Props:
- * - initial: objeto con filter inicial
- * - onApply(filters)
- * - onClear()
- */
 export default function Filters({ initial = {}, onApply = () => {}, onClear = () => {} }) {
+  // estados
   const [genre, setGenre] = useState(initial.genre || "");
   const [platform, setPlatform] = useState(initial.platform || "");
   const [completed, setCompleted] = useState(initial.completed || "any");
@@ -36,13 +31,17 @@ export default function Filters({ initial = {}, onApply = () => {}, onClear = ()
   };
 
   return (
-    <div className="filters-card">
-      <h4>Filtros y búsqueda</h4>
+    <div className="filters-card fixed-sidebar">
+      {/* Título agregado correctamente dentro del JSX */}
+      <h2 className="sidebar-title text-white text-xl font-semibold mb-4">
+        Filtros de búsqueda
+      </h2>
 
+      {/* Género */}
       <label className="field">
-        <div className="field-label">Género</div>
+        <span className="field-label">Género</span>
         <select value={genre} onChange={(e) => setGenre(e.target.value)}>
-          <option value="">Seleccione</option>
+          <option value="">Todos</option>
           <option value="RPG">RPG</option>
           <option value="Acción">Acción</option>
           <option value="Aventura">Aventura</option>
@@ -52,12 +51,13 @@ export default function Filters({ initial = {}, onApply = () => {}, onClear = ()
         </select>
       </label>
 
+      {/* Plataforma */}
       <label className="field">
-        <div className="field-label">Plataforma</div>
+        <span className="field-label">Plataforma</span>
         <select value={platform} onChange={(e) => setPlatform(e.target.value)}>
-          <option value="">Seleccione</option>
+          <option value="">Todas</option>
           <option value="PC">PC</option>
-          <option value="PS5">PlayStation</option>
+          <option value="PS5">PlayStation 5</option>
           <option value="PS4">PlayStation 4</option>
           <option value="Switch">Switch</option>
           <option value="Xbox">Xbox</option>
@@ -65,36 +65,34 @@ export default function Filters({ initial = {}, onApply = () => {}, onClear = ()
         </select>
       </label>
 
+      {/* Estado */}
       <label className="field">
-        <div className="field-label">Estado</div>
+        <span className="field-label">Estado</span>
         <select value={completed} onChange={(e) => setCompleted(e.target.value)}>
-          <option value="any">Seleccione</option>
+          <option value="any">Todos</option>
           <option value="completed">Completado</option>
-          <option value="incomplete">Por completar</option>
+          <option value="incomplete">Pendiente</option>
         </select>
       </label>
 
+      {/* Ordenar */}
       <label className="field">
-        <div className="field-label">Desarrollador</div>
-        <input value={developer} onChange={(e) => setDeveloper(e.target.value)} placeholder="Buscar por desarrollador" />
-      </label>
-
-      <label className="field">
-        <div className="field-label">Ordenar por</div>
+        <span className="field-label">Ordenar por</span>
         <select value={sort} onChange={(e) => setSort(e.target.value)}>
-          <option value="none">Seleccione</option>
-          <option value="date-desc">Fecha (recientes)</option>
-          <option value="date-asc">Fecha (antiguos)</option>
-          <option value="score-desc">Puntuación (mayor)</option>
-          <option value="score-asc">Puntuación (menor)</option>
+          <option value="none">Sin ordenar</option>
+          <option value="date-desc">Nuevos primero</option>
+          <option value="date-asc">Antiguos primero</option>
+          <option value="score-desc">Mejor puntuación</option>
+          <option value="score-asc">Peor puntuación</option>
           <option value="title-asc">Título A–Z</option>
           <option value="title-desc">Título Z–A</option>
         </select>
       </label>
 
-      <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", marginTop: 12 }}>
-        <button className="btn outline small" onClick={clear}>Limpiar</button>
-        <button className="btn primary small" onClick={apply}>Aplicar</button>
+      {/* Botones */}
+      <div className="filters-actions">
+        <button className="btn outline small" onClick={clear} type="button">Limpiar</button>
+        <button className="btn primary small" onClick={apply} type="button">Aplicar</button>
       </div>
     </div>
   );

@@ -1,10 +1,22 @@
-
 import React from 'react';
 
 export default function Footer() {
   return (
-    <footer style={{ marginTop: 20, color: 'var(--muted)' }}>
-      <div className="container footer-note">Hecho con ❤️</div>
+    <footer
+      role="contentinfo"
+      aria-label="Pie de página de GameTracker"
+      style={{
+        marginTop: 10,
+        padding: '15px 0',
+        textAlign: 'center',
+        backgroundColor: '#290d21ff',
+        color: 'var(--muted, #e0e0e0)',
+        borderTop: '1px solid #351111ff'
+      }}
+    >
+      <div className="container footer-note" style={{ fontSize: '13px' }}>
+        © 2025 GameTracker · Forjado para gamers
+      </div>
     </footer>
   );
 }
