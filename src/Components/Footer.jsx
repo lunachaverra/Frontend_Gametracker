@@ -9,9 +9,9 @@ export default function Footer() {
         marginTop: 10,
         padding: '15px 0',
         textAlign: 'center',
-        backgroundColor: '#290d21ff',
+        backgroundColor: '#c069ddff',
         color: 'var(--muted, #e0e0e0)',
-        borderTop: '1px solid #351111ff'
+        borderTop: '1px solid #720e6cff'
       }}
     >
       <div className="container footer-note" style={{ fontSize: '13px' }}>

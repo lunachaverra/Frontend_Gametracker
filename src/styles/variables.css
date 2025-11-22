@@ -30,3 +30,27 @@
   --dropdown-selected: #1E355A;         /* Azul gamer leve para selección */
   --dropdown-text: #ffffff;             /* Texto siempre blanco */
 }
+/* Modo claro */
+:root {
+  --bg-light: #f4f7fa;
+  --surface-light: #ffffff;
+  --text-light: #097c9f;
+  --muted-light: #4b5563;
+}
+
+/* Modo oscuro (ya existe) */
+html.dark {
+  --bg: #0B0F14;
+  --surface: #0F1720;
+  --text: #E6EEF6;
+  --muted: #9AA7B2;
+}
+
+/* Modo claro */
+html.light {
+  --bg: var(--bg-light);
+  --surface: var(--surface-light);
+  --text: var(--text-light);
+  --muted: var(--muted-light);
+}
+
