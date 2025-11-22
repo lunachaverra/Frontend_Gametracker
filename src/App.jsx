@@ -245,7 +245,7 @@ export default function App() {
   };
 
   return (
-    <div className="container">
+    <div className="container with-fixed-sidebar">
       <Header onAdd={openAdd} onSearch={handleSearch} />
 
       <div className="layout">
