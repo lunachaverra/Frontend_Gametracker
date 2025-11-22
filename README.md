@@ -1,18 +1,145 @@
-# React + Vite
+# 📘 **README -- GameTracker**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🎮 GameTracker
 
-Currently, two official plugins are available:
+GameTracker es una aplicación web diseñada para gestionar tu colección
+personal de videojuegos de forma organizada, visual y fácil de usar.\
+Permite registrar juegos, calificarlos, escribir reseñas, ver
+estadísticas y administrar tu biblioteca como un verdadero gamer.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+------------------------------------------------------------------------
 
-## React Compiler
+## 🚀 **Características principales**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 📚 **Gestión de Juegos**
 
-## Expanding the ESLint configuration
+-   Agregar nuevos videojuegos con portada.
+-   Ver toda tu colección en forma de tarjetas.
+-   Marcar juegos como completados.
+-   Editar o eliminar juegos existentes.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Frontend_Gametracker
-# Frontend_Gametracker
+### ⭐ **Sistema de Reseñas**
+
+-   Escribir reseñas con una calificación en estrellas.
+-   Ver reseñas de cada juego.
+-   Editarlas o eliminarlas.
+
+### 🔍 **Filtros Inteligentes**
+
+-   Ordenar y filtrar por:
+    -   Género\
+    -   Plataforma\
+    -   Estado (completado / pendiente)\
+    -   Puntuación
+
+### 📊 **Estadísticas**
+
+-   Total de juegos jugados.
+-   Promedio de calificación.
+-   Géneros más frecuentes.
+-   Tiempo total jugado.
+
+------------------------------------------------------------------------
+
+## 🛠️ **Tecnologías Utilizadas**
+
+### 🖥️ Backend
+
+  Tecnología   Descripción
+  ------------ ----------------------
+  Node.js      Entorno de ejecución
+  Express      Framework backend
+  MongoDB      Base de datos NoSQL
+  Mongoose     ODM para MongoDB
+
+### ⚛️ Frontend
+
+  Tecnología       Descripción
+  ---------------- ----------------------------
+  React            Biblioteca para UI
+  CSS / Tailwind   Estilos
+  React Hooks      Manejo del estado y lógica
+
+### 🗄️ Base de Datos
+
+-   MongoDB Atlas (cloud)
+-   Mongoose para modelos y validaciones
+
+### 📝 CRUD Implementado
+
+-   Juegos
+-   Reseñas
+
+------------------------------------------------------------------------
+
+## 🧱 Arquitectura del Backend (MVC + Rutas)
+
+controllers/\
+gameController.js\
+reviewController.js
+
+models/\
+Game.js\
+Review.js
+
+routes/\
+games.js\
+reviews.js
+
+index.js\
+.env\
+package.json\
+seed.js\
+test-mongo.js
+
+------------------------------------------------------------------------
+
+## 🔌 Endpoints del Backend
+
+### 🎮 Videojuegos
+
+-   GET /api/juegos
+-   GET /api/juegos/:id
+-   POST /api/juegos
+-   PUT /api/juegos/:id
+-   DELETE /api/juegos/:id
+
+### 📝 Reseñas
+
+-   GET /api/reseñas
+-   GET /api/reseñas/juego/:juegoId
+-   POST /api/reseñas
+-   PUT /api/reseñas/:id
+-   DELETE /api/reseñas/:id
+
+------------------------------------------------------------------------
+
+## ⚛️ Arquitectura del Frontend
+
+src/\
+├── assets/\
+├── Components/\
+├── hooks/\
+├── Pages/\
+├── services/ (api.js)\
+├── styles/\
+├── App.jsx\
+└── main.jsx
+
+------------------------------------------------------------------------
+
+## 🎯 Objetivo del Proyecto
+
+El propósito de GameTracker es permitir a los jugadores calificar,
+organizar y compartir información sobre videojuegos, ayudando a otros
+usuarios a tomar mejores decisiones.
+
+------------------------------------------------------------------------
+
+## 🧑‍💻 Estado Actual
+
+✔ Backend funcional\
+✔ Frontend conectado\
+✔ CRUD completo\
+✔ Sistema de reseñas\
+✔ Filtros
