@@ -1,3 +1,80 @@
+/* ===== Modificaciones: estilos para selects personalizados (select-filter) =====
+   Copia y pega este archivo completo en src/styles/components.css
+   (Incluye tus estilos originales y las reglas nuevas para .select-filter)
+*/
+
+/* ===== Estilos para select personalizado ===== */
+.select-filter {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  background-color: #0f1720;   /* fondo oscuro del desplegable */
+  color: #ffffff;              /* texto blanco */
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: box-shadow .15s ease, border-color .15s ease, transform .12s ease;
+  position: relative;
+  /* flecha personalizada compuesta con gradientes para mayor compatibilidad */
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.9) 50%),
+    linear-gradient(135deg, rgba(255,255,255,0.9) 50%, transparent 50%),
+    linear-gradient(to right, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background-position:
+    calc(100% - 18px) calc(1em + 2px),
+    calc(100% - 13px) calc(1em + 2px),
+    0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+  padding-right: 40px; /* espacio para la flecha */
+}
+
+/* Focus glow (azul gamer suave) */
+.select-filter:focus {
+  border-color: rgba(99,102,241,0.9); /* azul */
+  box-shadow: 0 8px 30px rgba(99,102,241,0.12);
+  transform: translateY(-1px);
+}
+
+/* Base para opciones: fondo oscuro y texto claro (mejor soporte en Chrome/Edge/Firefox) */
+.select-filter option {
+  background-color: #0f1720 !important;
+  color: #ffffff !important;
+}
+
+/* Opción activa / seleccionada (sombra azul tenue tipo "gamer") */
+.select-filter option:checked,
+.select-filter option:active {
+  background-color: rgba(99,102,241,0.12) !important; /* azul tenue */
+  color: #ffffff !important;
+}
+
+/* Hover dentro del menú (si el navegador lo soporta) */
+.select-filter option:hover {
+  background-color: rgba(99,102,241,0.10) !important;
+  color: #fff !important;
+}
+
+/* Ocultar la flecha nativa en IE/Edge */
+.select-filter::-ms-expand {
+  display: none;
+}
+
+/* Compatibilidad WebKit (Safari/Chrome) */
+@supports (-webkit-appearance:none) {
+  .select-filter option {
+    background-color: #0f1720;
+    color: #fff;
+  }
+}
+
+/* ===== FIN select-filter ===== */
+
+
+/* ----------------------- Tu archivo components original (con ligeros ajustes) ----------------------- */
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .card{display:flex;gap:11px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));border:1px solid var(--border);padding:var(--card-padding);border-radius:var(--radius);align-items:flex-start;transition:transform var(--transition),box-shadow var(--transition)}
@@ -161,7 +238,37 @@
   color: var(--muted);
 }
 
-.filters-card select,
+/* Aseguramos que los select dentro del panel usen la apariencia oscura por defecto
+   si no les pones la clase .select-filter directamente en el JSX */
+.filters-card select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #0f1720;   /* fondo oscuro por defecto */
+  color: #fff;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, rgba(255,255,255,0.9) 50%),
+    linear-gradient(135deg, rgba(255,255,255,0.9) 50%, transparent 50%),
+    linear-gradient(to right, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background-position:
+    calc(100% - 18px) calc(1em + 2px),
+    calc(100% - 13px) calc(1em + 2px),
+    0 0;
+  background-size: 6px 6px, 6px 6px, 100% 100%;
+  background-repeat: no-repeat;
+  padding-right: 40px;
+}
+
+/* Aseguramos que las opciones se vean oscuras dentro del select por defecto */
+.filters-card select option {
+  background-color: #0f1720 !important;
+  color: #fff !important;
+}
+
 .filters-card input {
   padding: 10px 12px;
   border-radius: 8px;
