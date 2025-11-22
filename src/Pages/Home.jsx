@@ -1,7 +1,10 @@
+// src/Pages/Home.jsx
 import React from 'react';
 import GameGrid from '../Components/GameGrid';
 
 export default function Home({ games, onEdit, onDelete, onRate }) {
+  const hasItems = Array.isArray(games) && games.length > 0;
+
   return (
     <main className="main">
       <section className="hero">
@@ -13,7 +16,16 @@ export default function Home({ games, onEdit, onDelete, onRate }) {
         </div>
       </section>
 
-      <GameGrid games={games} onEdit={onEdit} onDelete={onDelete} onRate={onRate} />
+      {hasItems ? (
+        <GameGrid games={games} onEdit={onEdit} onDelete={onDelete} onRate={onRate} />
+      ) : (
+        <div className="no-results">
+          <h3>No se encontraron resultados en tus busqueda</h3>
+          <p style={{ color: 'var(--muted)', marginTop: 6 }}>
+            Intenta con otros términos, filtros, o borra la búsqueda.
+          </p>
+        </div>
+      )}
     </main>
   );
 }
