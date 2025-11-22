@@ -10,6 +10,7 @@ function starFillPercent(index, rating) {
 }
 
 export default function GameCard({ game, onEdit, onDelete, onRate }) {
+  // Desestructuramos genre además de los demás
   const {
     cover,
     title,
@@ -18,6 +19,7 @@ export default function GameCard({ game, onEdit, onDelete, onRate }) {
     progress = 0,
     description,
     rating = 0,
+    genre = ""
   } = game || {};
 
   const handleRateClick = (value) => {
@@ -41,16 +43,20 @@ export default function GameCard({ game, onEdit, onDelete, onRate }) {
         >
           <div>
             <h3 className="card-title">{title}</h3>
+
+            {/* Aquí mostramos plataforma, estado y género */}
             <div className="card-meta">
               {platform} • <span style={{ textTransform: "capitalize" }}>{status}</span>
+              {genre ? ` • ${genre}` : null}
             </div>
           </div>
 
+          {/* Rating stars (igual que antes) */}
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
             <div className="stars" aria-label={`Calificación ${rating} de 5`}>
               {[1, 2, 3, 4, 5].map((i) => {
                 const percent = starFillPercent(i, Number(rating));
-                const gradId = `g-${title?.replace(/\s+/g, "") || "x"}-${i}`;
+                const gradId = `g-${(title || "x").replace(/\s+/g, "")}-${i}`;
                 return (
                   <button
                     key={i}

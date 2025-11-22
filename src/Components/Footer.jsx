@@ -9,7 +9,7 @@ export default function Footer() {
         marginTop: 10,
         padding: '15px 0',
         textAlign: 'center',
-        backgroundColor: '#c069ddff',
+        backgroundColor: '#bb6dd5ff',
         color: 'var(--muted, #e0e0e0)',
         borderTop: '1px solid #720e6cff'
       }}

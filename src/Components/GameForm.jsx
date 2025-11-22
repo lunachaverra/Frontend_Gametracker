@@ -1,6 +1,15 @@
 // src/Components/GameForm.jsx
 import React, { useEffect, useState } from "react";
 
+const GENEROS = [
+  "RPG",
+  "Acción",
+  "Aventura",
+  "Indie",
+  "Estrategia",
+  "Simulación",
+];
+
 export default function GameForm({
   initial = null,
   onClose = () => {},
@@ -10,6 +19,7 @@ export default function GameForm({
   const [title, setTitle] = useState("");
   const [platform, setPlatform] = useState("");
   const [status, setStatus] = useState("");
+  const [genre, setGenre] = useState("");
   const [progress, setProgress] = useState(0);
   const [cover, setCover] = useState("");
   const [description, setDescription] = useState("");
@@ -26,16 +36,18 @@ export default function GameForm({
       setTitle(initial.title || "");
       setPlatform(initial.platform || "");
       setStatus(initial.status || "");
+      setGenre(initial.genre || "");
       setProgress(initial.progress ?? 0);
-      setCover(initial.cover || "");
+      setCover(initial.cover || initial.coverUrl || "");
       setDescription(initial.description || "");
       setRating(initial.rating ?? 0);
-      setPreviewUrl(initial.cover || "");
-      setPreviewValid(initial.cover ? true : null);
+      setPreviewUrl(initial.cover || initial.coverUrl || "");
+      setPreviewValid(initial.cover || initial.coverUrl ? true : null);
     } else {
       setTitle("");
       setPlatform("");
       setStatus("");
+      setGenre("");
       setProgress(0);
       setCover("");
       setDescription("");
@@ -87,8 +99,11 @@ export default function GameForm({
       title: title.trim(),
       platform: platform.trim() || "PC",
       status: status.trim() || "Pendiente",
+      genre: genre || "",
       progress: Number(progress),
+      // mantengo compatibilidad: algunos docs usan `cover` y otros `coverUrl`
       cover: cover || (previewValid ? previewUrl : ""),
+      coverUrl: cover || (previewValid ? previewUrl : ""),
       description: description || "",
       rating: Number(rating),
     };
@@ -197,17 +212,37 @@ export default function GameForm({
             </label>
           </div>
 
-          <label className="field">
-            <div className="field-label">Progreso (%)</div>
-            <input
-              type="number"
-              min="0"
-              max="100"
-              value={progress}
-              onChange={(e) => setProgress(e.target.value)}
-              disabled={isSaving}
-            />
-          </label>
+          {/* Row con Género y Progreso */}
+          <div style={{ display: "flex", gap: 8 }}>
+            <label className="field" style={{ flex: 1 }}>
+              <div className="field-label">Género</div>
+              <select
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
+                disabled={isSaving}
+                style={{ padding: "10px 12px", borderRadius: 12, border: "1px solid var(--border)", background: "linear-gradient(180deg, rgba(255,255,255,0.01), transparent)", color: "var(--text)" }}
+              >
+                <option value="">Todos</option>
+                {GENEROS.map((g) => (
+                  <option key={g} value={g}>
+                    {g}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="field" style={{ flex: 1 }}>
+              <div className="field-label">Progreso (%)</div>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value={progress}
+                onChange={(e) => setProgress(e.target.value)}
+                disabled={isSaving}
+              />
+            </label>
+          </div>
 
           <label className="field">
             <div className="field-label">Cover (URL)</div>
