@@ -32,12 +32,6 @@ estadísticas y administrar tu biblioteca como un verdadero gamer.
     -   Estado (completado / pendiente)\
     -   Puntuación
 
-### 📊 **Estadísticas**
-
--   Total de juegos jugados.
--   Promedio de calificación.
--   Géneros más frecuentes.
--   Tiempo total jugado.
 
 ------------------------------------------------------------------------
 
