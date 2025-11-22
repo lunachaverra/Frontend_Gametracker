@@ -1,6 +1,6 @@
 // src/Components/Header.jsx
 import React, { useState } from "react";
-import ThemeToggle from "./ThemeToggle"; // Asegúrate de crear este componente en Components (opcional)
+import ThemeToggle from "./ThemeToggle"; 
 
 export default function Header({ onAdd = () => {}, onSearch = () => {} }) {
   const [query, setQuery] = useState("");
@@ -118,7 +118,6 @@ export default function Header({ onAdd = () => {}, onSearch = () => {} }) {
           Agregar juego
         </button>
 
-        {/* ThemeToggle es opcional: si no lo tienes, quita esta línea o crea el componente */}
         <ThemeToggle />
       </div>
     </header>

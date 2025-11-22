@@ -101,7 +101,7 @@ export default function GameForm({
       status: status.trim() || "Pendiente",
       genre: genre || "",
       progress: Number(progress),
-      // mantengo compatibilidad: algunos docs usan `cover` y otros `coverUrl`
+      
       cover: cover || (previewValid ? previewUrl : ""),
       coverUrl: cover || (previewValid ? previewUrl : ""),
       description: description || "",

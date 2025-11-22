@@ -24,7 +24,7 @@
 
   --accent-grad: linear-gradient(90deg, var(--primary), var(--accent));
 
-  /* 🔥 NUEVAS VARIABLES PARA SELECT GAMER */
+  /* NUEVAS VARIABLES PARA SELECT GAMER */
   --dropdown-bg: #111820;               /* Fondo del menú desplegable */
   --dropdown-hover: #1A2330;            /* Hover oscuro */
   --dropdown-selected: #1E355A;         /* Azul gamer leve para selección */
@@ -38,7 +38,7 @@
   --muted-light: #4b5563;
 }
 
-/* Modo oscuro (ya existe) */
+/* Modo oscuro*/
 html.dark {
   --bg: #0B0F14;
   --surface: #0F1720;

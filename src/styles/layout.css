@@ -112,8 +112,6 @@
   }
   .with-fixed-sidebar .main { margin-left: 0 !important; }
 }
-/* Asegúrate de tener una variable --sidebar-width en variables.css.
-   Si no, usamos 260px por defecto con fallback. */
 
 .fixed-sidebar {
   position: fixed !important;

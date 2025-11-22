@@ -1,7 +1,4 @@
-/* ===== Modificaciones: estilos para selects personalizados (select-filter) =====
-   Copia y pega este archivo completo en src/styles/components.css
-   (Incluye tus estilos originales y las reglas nuevas para .select-filter)
-*/
+/* ===== Modificaciones: estilos para selects personalizados (select-filter) ===== */
 
 /* ===== Estilos para select personalizado ===== */
 .select-filter {
@@ -71,13 +68,11 @@
   }
 }
 
-/* ===== FIN select-filter ===== */
 
-
-/* ----------------------- Tu archivo components original (con ligeros ajustes) ----------------------- */
+/* Card Styles */
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{display:flex;gap:40px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));border:1px solid var(--border);padding:var(--card-padding);border-radius:var(--radius);align-items:flex-start;transition:transform var(--transition),box-shadow var(--transition)}
+.card{display:flex;gap:20px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));border:1px solid var(--border);padding:var(--card-padding);border-radius:var(--radius);align-items:flex-start;transition:transform var(--transition),box-shadow var(--transition)}
 .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(60, 121, 252, 0.08)}
 .card img{width:120px;height:130px;object-fit:cover;border-radius:10px;flex-shrink:0}
 .card-body{flex:1;display:flex;flex-direction:column;gap:8px}
@@ -238,8 +233,7 @@
   color: var(--muted);
 }
 
-/* Aseguramos que los select dentro del panel usen la apariencia oscura por defecto
-   si no les pones la clase .select-filter directamente en el JSX */
+/* Aseguramos que los select dentro del panel usen la apariencia oscura por defecto */
 .filters-card select {
   padding: 10px 12px;
   border-radius: 8px;
@@ -353,7 +347,7 @@
    Estilos: inputs / selects
    --------------------------- */
 
-/* Asegúrate de que los inputs/selects usen el fondo oscuro y texto claro */
+/* Asegurar de que los inputs/selects usen el fondo oscuro y texto claro */
 .filters-card select,
 .modal .field select,
 .filters-card input,
@@ -377,8 +371,7 @@
   position: relative;
 }
 
-/* Si quieres añadir arrow dentro del select (opcional),
-   usa un wrapper .select-wrap alrededor del select en el JSX o aplica :after en el parent */
+
 .field.select-wrap::after,
 .filters-card .select-wrap::after {
   content: "▾";
@@ -462,9 +455,9 @@ select option[selected] {
 
 /* ---------------------------
    Ajustes visuales extra
-   --------------------------- */
 
-/* Si quieres que el select muestre la flecha nativa en Firefox (opcional), quita appearance en FF: */
+
+/*select muestre la flecha nativa en Firefox (opcional)*/
 select::-ms-expand { display: none; }
 
 /* Pequeña mejora en foco para accesibilidad */
@@ -474,12 +467,12 @@ input:focus, textarea:focus, select:focus {
 
 /* Ajuste: ancho máximo para el contenido principal para que no quede centrado */
 .main {
-  max-width: 960px; /* controla el ancho del contenido (ajusta si necesitas) */
-  margin-left: 0; /* lo dejamos pegado al contenedor para respetar sidebar */
+  max-width: 960px; /* controla el ancho del contenido*/
+  margin-left: 0; 
   padding-right: 24px;
 }
 
-/* Si usas layout con .with-fixed-sidebar, aseguramos que el main no quede centrado */
+/*Aseguramos que el main no quede centrado */
 .with-fixed-sidebar .main {
   margin-left: var(--sidebar-width, 260px);
   margin-right: 40px; /* separación del borde derecho */

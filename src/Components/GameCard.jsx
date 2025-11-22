@@ -50,8 +50,7 @@ export default function GameCard({ game, onEdit, onDelete, onRate }) {
               {genre ? ` • ${genre}` : null}
             </div>
           </div>
-
-          {/* Rating stars (igual que antes) */}
+          
           <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
             <div className="stars" aria-label={`Calificación ${rating} de 5`}>
               {[1, 2, 3, 4, 5].map((i) => {
